@@ -8,18 +8,20 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import firebase from "../database/firebaseDB";
+import { SwipeListView } from 'react-native-swipe-list-view';
+import Basic from "../swipe/basic";
 
 const db = firebase.firestore().collection("todos");
 
 export default function NotesScreen({ navigation, route }) {
   const [notes, setNotes] = useState([]);
 
-  firebase.firestore().collection("testing").add({
-    title: "Testing! Does this work???",
-    body: "This is to check the Integration is working",
-    potato: true,
-    question: "Why is there a potato bool here",
-  });
+  //firebase.firestore().collection("testing").add({
+    //title: "Testing! Does this work???",
+    //body: "This is to check the Integration is working",
+    //potato: true,
+    //question: "Why is there a potato bool here",
+  //});
 
   // This is to set up the top right button
   useEffect(() => {
@@ -58,6 +60,14 @@ export default function NotesScreen({ navigation, route }) {
             return unsubscribe;
           }, []);
           
+
+  function onRowOpen(rowKey, rowMap, toValue) {
+  // Grab reference to this row
+  const rowRef = rowMap[rowKey];
+        
+  // Do something with the row
+  rowRef.closeRow();
+  }
 
       
   // Monitor route.params for changes and add items to the database
@@ -102,39 +112,70 @@ export default function NotesScreen({ navigation, route }) {
           paddingBottom: 20,
           borderBottomColor: "#ccc",
           borderBottomWidth: 1,
-          flexDirection: "row",
+          flexDirection: "wrap",
           justifyContent: "space-between",
         }}
       >
         
-        <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
+        <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{item.title}</Text>
         <Text style={{  }}>{item.content}</Text>
         
-        <TouchableOpacity onPress={() => deleteNote(item.id)}>
-          <Ionicons name="trash" size={16} color="#944" />
+        <TouchableOpacity 
+          style={{ flexDirection: "row-reverse" }}
+          onPress={() => deleteNote(item.id)}>
+          <Ionicons name="trash" size={18} color="#944" />
         </TouchableOpacity>
       </View>
       </TouchableOpacity>
     );
   }
 
+  //const renderHiddenItem = (item, rowMap) => (
+   // <View style={styles.rowBack}>
+        
+        //<TouchableOpacity
+            //style={[styles.backRightBtn, styles.backRightBtnRight]}
+            //onPress={() => deleteRow(rowMap, data.item.key)}
+        //>
+            //<Text style={styles.backTextWhite}>Delete</Text>
+        //</TouchableOpacity>
+    //</View>
+//);
+
+  
+
   return (
-    <View style={styles.container}>
-      <FlatList
+    <SwipeListView
+    //<View style={styles.container}>
+      
         data={notes}
         renderItem={renderItem}
+        //renderHiddenItem={renderHiddenItem}
+          
+      //leftOpenValue={75}
+      rightOpenValue={-75}
+      onRowOpen={(rowKey, rowMap) => {
+          setTimeout(() => {
+              //rowMap[rowKey].closeRow()
+          }, 2000)
+      }}
         style={{ width: "100%" }}
         keyExtractor={(item) => item.id.toString()}
       />
-    </View>
-  );
-  }
+    //</View>
+
+
+    
+    
+    )}
+    
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    //flex: 1,
     backgroundColor: "#cadff3",
     alignItems: "center",
     justifyContent: "center",
   },
+  
 });

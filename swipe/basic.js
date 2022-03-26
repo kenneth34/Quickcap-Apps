@@ -53,7 +53,7 @@ export default function Basic() {
                 style={[styles.backRightBtn, styles.backRightBtnLeft]}
                 onPress={() => closeRow(rowMap, data.item.key)}
             >
-                <Text style={styles.backTextWhite}>Close</Text>
+                <Text style={styles.backTextWhite}></Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={[styles.backRightBtn, styles.backRightBtnRight]}

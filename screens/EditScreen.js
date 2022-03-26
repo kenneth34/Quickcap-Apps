@@ -16,26 +16,23 @@ export default function EditScreen({ navigation, route }) {
 
   return (
     <View style={[styles.container, { backgroundColor: "white" }]}>
-      <Text style={{ fontSize: 24 }}>What have you learn?</Text>
-      <Text>Title:</Text>
+      <Text style={{ fontSize: 24 }}>Your Inputs</Text>
+      <Text></Text>
       <TextInput
         style={styles.textInput}
         value={notes.title}
+        editable={true}
         onChangeText={(input) => setText(input)}
       />
-      <Text>Content:</Text>
+      <Text></Text>
       <TextInput
         style={styles.textInput}
         value={notes.content}
+        editable={true}
         onChangeText={(input) => setContent(input)}
       />
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Notes", { text, content })}
-        >
-          <Text style={styles.buttonText}>Save</Text>
-        </TouchableOpacity>
+        
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.goBack()}

@@ -10,7 +10,7 @@ export default function NotesStack() {
         name="Notes"
         component={NotesScreen}
         options={{
-          title: "My Course",
+          title: "My Courses",
           headerStyle: {
             backgroundColor: "lightblue",
             height: 100,
