@@ -93,7 +93,7 @@ export default function NotesScreen({ navigation, route }) {
   function renderItem({ item }) {
     return (
       <TouchableOpacity 
-      onPress={() => navigation.navigate("Edit Screen", {notes})}
+      onPress={() => navigation.navigate("Edit Screen", {post: item})}
       >
       <View
         style={{

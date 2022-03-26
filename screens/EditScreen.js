@@ -11,14 +11,8 @@ export default function EditScreen({ navigation, route }) {
   const [text, setText] = useState("");
   const [content, setContent] = useState("");
   //const { id } = route.params;
+  const notes = route.params?.post
   
-
-  const notes = {
-    title: route.params.text,
-    content: route.params.content,
-    done: false,
-    //id: notes.length.toString(),
-  };
 
   return (
     <View style={[styles.container, { backgroundColor: "white" }]}>
@@ -26,13 +20,13 @@ export default function EditScreen({ navigation, route }) {
       <Text>Title:</Text>
       <TextInput
         style={styles.textInput}
-        value={text}
+        value={notes.title}
         onChangeText={(input) => setText(input)}
       />
       <Text>Content:</Text>
       <TextInput
         style={styles.textInput}
-        value={content}
+        value={notes.content}
         onChangeText={(input) => setContent(input)}
       />
       <View style={styles.buttonContainer}>
